@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { Card } from '@material-ui/core';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 import {getMovieDetails} from '../redux/actions'
 
@@ -32,14 +35,14 @@ class MovieDetailsPage extends React.Component {
     //show details
     else {
       contentHTML = (
-        <table>
-          <tr style={{padding: 18}}>
-            <td> <img src= {this.props.movieDetails.Poster} /> </td>
-            <td> {Object.keys(this.props.movieDetails).map(
-              property => this.showMovieInfo(property, this.props.movieDetails[property]))}
-            </td>
-          </tr>
-        </table>)
+        <Card>
+          <img src={this.props.movieDetails.Poster} />
+          <CardContent style={{display: "inline-block"}}>
+            {Object.keys(this.props.movieDetails).map(property => this.showMovieInfo(property, this.props.movieDetails[property]))}
+          </CardContent>
+        </Card>
+
+      )
     }
 
      return (
@@ -68,9 +71,9 @@ class MovieDetailsPage extends React.Component {
         return
         break;
       case 'Ratings':
-        return <div class="padding">{property + ':' + value.map(v => ' ' + v.Source + ' ' + v.Value)} </div>
+        return <Typography style={{textAlign: "left"}} variant="body2" color="textSecondary" component="p">{property + ':' + value.map(v => ' ' + v.Source + ' ' + v.Value)} </Typography>
       default:
-        return <div class="padding">{property + ': ' + value} </div>
+        return <Typography style={{textAlign: "left"}} variant="body2" color="textSecondary" component="p">{property + ': ' + value} </Typography>
     }
   }
 }

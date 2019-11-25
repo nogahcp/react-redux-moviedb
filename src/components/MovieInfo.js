@@ -22,7 +22,7 @@ render() {
     <Card style={{width: "345px", margin: "8px"}}>
       <CardActionArea onClick={this.props.onClick}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" component="h2">
             {this.state.movie.Title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
