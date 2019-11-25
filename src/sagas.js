@@ -1,6 +1,8 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
+
 import {fetchMovies, fetchMovieDetails} from './moviesAPI'
-import { MOVIES_FETCH_SUCCEEDED, GET_MOVIE_DETAILS, DETAILS_FETCH_SUCCEEDED, GET_MORE_RESULTS, ERROR } from './redux/actions'
+import { MOVIES_FETCH_SUCCEEDED, GET_MOVIE_DETAILS, DETAILS_FETCH_SUCCEEDED, GET_MORE_RESULTS, ERROR, ROUTE } from './redux/actions'
 
 //get movies for search
 function* getMovies(action) {
@@ -69,10 +71,17 @@ function* getMovieDetails(action) {
   }
 }
 
+function* route(action) {
+  console.log(action.payload);
+  // yield browserHistory.push(action.payload)
+}
+
 function* mySaga() {
   yield takeLatest("SEARCH_MOVIES", getMovies);
   yield takeEvery("GET_MOVIE_DETAILS", getMovieDetails);
   yield takeEvery("GET_MORE_RESULTS", getMoreResults);
+  yield takeEvery("ROUTE", route);
+
 }
 
 export default mySaga

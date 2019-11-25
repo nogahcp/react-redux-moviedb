@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Redirect, browserHistory } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid';
 
 import MovieInfo from './MovieInfo'
-import { getMoreResults} from '../redux/actions'
+import { getMoreResults, route } from '../redux/actions'
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -31,16 +32,14 @@ class SearchResults extends React.Component {
     //show results in table
     return (
       <div>
-        <table id="moviesTable">
-          <tbody>
-          {this.props.moviesList.map(
-            movie => (
+        <Grid container spacing={3} id='moviesGrid'>
+          {this.props.moviesList.map(movie => (
+            <Grid item xs>
               <MovieInfo movie={movie} key={movie.imdbID} onClick={() => this.movieClicked(movie.imdbID)}/>
-            )
-          )}
-          </tbody>
-        </table>
-      </div>
+            </Grid>
+          ))}
+        </Grid>
+      </ div>
     )
   }
 
@@ -51,6 +50,11 @@ class SearchResults extends React.Component {
       showDetails: true,
       detailedMovieId: imdbId,
     })
+    // console.log("click");
+    // const url = '/MovieDetails/' + imdbId
+    // this.context.history.push(url)
+    //
+    // this.props.route(url)
   }
 
   //when scroll down get more results
@@ -68,7 +72,7 @@ class SearchResults extends React.Component {
   }
 
   trackScrolling = () => {
-    const wrappedElement = document.getElementById('moviesTable');
+    const wrappedElement = document.getElementById('moviesGrid');
     //if reached bottom - get more results
     if (this.isBottom(wrappedElement)) {
       console.log('moviesTable bottom reached');
@@ -88,6 +92,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getMoreResults: getMoreResults,
+  route: route,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)

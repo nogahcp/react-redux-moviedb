@@ -11,7 +11,7 @@ class SearchScreen extends React.Component {
       <div align="center">
         <h2> Search For Movies </h2>
         <input type="search" onChange={this.handleInputChange} placeholder='Search Movies' text={this.props.searchString} />
-        <br /><br/>
+        <br/><br/>
         <SearchResults />
       </div>
     )

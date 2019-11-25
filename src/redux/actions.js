@@ -5,6 +5,7 @@ export const MOVIES_FETCH_SUCCEEDED = 'MOVIES_FETCH_SUCCEEDED'
 export const DETAILS_FETCH_SUCCEEDED = 'DETAILS_FETCH_SUCCEEDED'
 export const GET_MORE_RESULTS = 'GET_MORE_RESULTS'
 export const ERROR = 'ERROR'
+export const ROUTE = 'ROUTE'
 
 // action creators
 export const searchMovies = searchString => ({
@@ -35,4 +36,9 @@ export const detailsFetchSucceeded = movieDetails => ({
 export const error = errorMessage => ({
   type: ERROR,
   payload: errorMessage,
+})
+
+export const route = toUrl => ({
+  type: ROUTE,
+  payload: toUrl,
 })
