@@ -1,6 +1,6 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import {fetchMovies, fetchMovieDetails} from './moviesAPI'
-import { MOVIES_FETCH_SUCCEEDED, SHOW_MOVIE_DETAILS, DETAILS_FETCH_SUCCEEDED, GET_MORE_RESULTS, ERROR } from './redux/actions'
+import { MOVIES_FETCH_SUCCEEDED, GET_MOVIE_DETAILS, DETAILS_FETCH_SUCCEEDED, GET_MORE_RESULTS, ERROR } from './redux/actions'
 
 //get movies for search
 function* getMovies(action) {
@@ -71,7 +71,7 @@ function* getMovieDetails(action) {
 
 function* mySaga() {
   yield takeLatest("SEARCH_MOVIES", getMovies);
-  yield takeEvery("SHOW_MOVIE_DETAILS", getMovieDetails);
+  yield takeEvery("GET_MOVIE_DETAILS", getMovieDetails);
   yield takeEvery("GET_MORE_RESULTS", getMoreResults);
 }
 

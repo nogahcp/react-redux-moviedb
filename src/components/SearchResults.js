@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, browserHistory } from 'react-router-dom'
 
 import MovieInfo from './MovieInfo'
-import {showMovieDetails, getMoreResults} from '../redux/actions'
+import { getMoreResults} from '../redux/actions'
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -87,7 +87,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  showMovieDetails: showMovieDetails,
   getMoreResults: getMoreResults,
 }
 

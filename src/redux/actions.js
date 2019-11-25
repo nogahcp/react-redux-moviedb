@@ -1,6 +1,6 @@
 // action types
 export const SEARCH_MOVIES = 'SEARCH_MOVIES'
-export const SHOW_MOVIE_DETAILS = 'SHOW_MOVIE_DETAILS'
+export const GET_MOVIE_DETAILS = 'GET_MOVIE_DETAILS'
 export const MOVIES_FETCH_SUCCEEDED = 'MOVIES_FETCH_SUCCEEDED'
 export const DETAILS_FETCH_SUCCEEDED = 'DETAILS_FETCH_SUCCEEDED'
 export const GET_MORE_RESULTS = 'GET_MORE_RESULTS'
@@ -17,8 +17,8 @@ export const getMoreResults = (searchString, remainingResults, page) => ({
   payload: { searchString, remainingResults, page }
 })
 
-export const showMovieDetails = movieId => ({
-  type: SHOW_MOVIE_DETAILS,
+export const getMovieDetails = movieId => ({
+  type: GET_MOVIE_DETAILS,
   payload: movieId,
 })
 

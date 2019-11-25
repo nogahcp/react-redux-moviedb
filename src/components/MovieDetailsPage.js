@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import {showMovieDetails} from '../redux/actions'
+import {getMovieDetails} from '../redux/actions'
 
 class MovieDetailsPage extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class MovieDetailsPage extends React.Component {
       backToSearch: false,
     }
     //fetch movie data
-    this.props.showMovieDetails(this.props.match.params.movieId)
+    this.props.getMovieDetails(this.props.match.params.movieId)
   }
 
   render() {
@@ -82,7 +82,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  showMovieDetails: showMovieDetails,
+  getMovieDetails: getMovieDetails,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage)
