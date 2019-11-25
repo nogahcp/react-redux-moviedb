@@ -6,6 +6,7 @@ const apiKey = 'b3db097d'
 const searchURL = 'https://www.omdbapi.com/?s='
 const detailsURL = 'https://www.omdbapi.com/?i='
 
+//fetch movies from server using search string and page
 const fetchMovies = (searchString, page) => {
   return fetch(searchURL + searchString + '&apikey=' + apiKey + '&page=' + page)
     .then(res => res.json())
@@ -13,17 +14,13 @@ const fetchMovies = (searchString, page) => {
         (result) => {
           return result
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           return error
         }
       )
 }
 
-
-
+//fetch movie details from server using movieId
 const fetchMovieDetails = (movieId) => {
   console.log("fetchMovieDetails");
   return fetch(detailsURL + movieId + '&apikey=' + apiKey)
@@ -32,9 +29,6 @@ const fetchMovieDetails = (movieId) => {
         (result) => {
           return result
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           return error
         }

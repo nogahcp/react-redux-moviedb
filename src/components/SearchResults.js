@@ -17,20 +17,18 @@ class SearchResults extends React.Component {
   render() {
     //go to details page
     if (this.state.showDetails === true) {
-      return <Redirect to= { '/movieDetails/'+this.state.detailedMovieId }/>
+      return <Redirect to= { '/MovieDetails/'+this.state.detailedMovieId }/>
     }
     //alert on error
     if (this.props.error.isError === true) {
-      return <h1> {this.props.error.message} </h1>
+      return <div class="error"> {this.props.error.message} </div>
     }
     //show loading
     if (this.props.isLoading === true) {
       const Loading = require('react-loading-animation');
-      return <Loading />
+      return ( <Loading /> )
     }
-    // if (this.props.moviesList === undefined) {
-    //   return <div></div>
-    // }
+    //show results in table
     return (
       <div>
         <table id="moviesTable">
@@ -46,14 +44,13 @@ class SearchResults extends React.Component {
     )
   }
 
+  //set state to show details when movie is clicked
   movieClicked(imdbId) {
     //go to details screen
     this.setState({
       showDetails: true,
       detailedMovieId: imdbId,
     })
-    //get movie data from server
-    //this.props.showMovieDetails(imdbId)
   }
 
   //when scroll down get more results
@@ -72,10 +69,10 @@ class SearchResults extends React.Component {
 
   trackScrolling = () => {
     const wrappedElement = document.getElementById('moviesTable');
+    //if reached bottom - get more results
     if (this.isBottom(wrappedElement)) {
       console.log('moviesTable bottom reached');
       this.props.getMoreResults(this.props.searchString, this.props.remainingResults, this.props.page)
-      // document.removeEventListener('scroll', this.trackScrolling);
     }
   };
 }

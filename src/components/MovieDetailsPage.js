@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import {showMovieDetails} from '../redux/actions'
 
-class MovieDetails extends React.Component {
+class MovieDetailsPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,50 +15,62 @@ class MovieDetails extends React.Component {
   }
 
   render() {
+    var contentHTML
+    //redirect back to search
     if (this.state.backToSearch === true) {
       return <Redirect to= '/'/>
     }
     //alert on error
     if (this.props.error.isError === true) {
-      return <h1 align="center"> {this.props.error.message} </h1>
+      contentHTML = <div class="error" align="center"> {this.props.error.message} </div>
     }
     //loading
-    if (this.props.isLoading === true) {
+    else if (this.props.isLoading === true) {
       const Loading = require('react-loading-animation');
-      return <Loading align="center"/>
+      contentHTML = <Loading align="center"/>
     }
+    //show details
+    else {
+      contentHTML = (
+        <table>
+          <tr style={{padding: 18}}>
+            <td> <img src= {this.props.movieDetails.Poster} /> </td>
+            <td> {Object.keys(this.props.movieDetails).map(
+              property => this.showMovieInfo(property, this.props.movieDetails[property]))}
+            </td>
+          </tr>
+        </table>)
+    }
+
      return (
-      <div align="center">
-      <table>
-        <tr>
-          <td> <img src= {this.props.movieDetails.Poster} /> </td>
-          <td> {Object.keys(this.props.movieDetails).map(
-            property => this.showMovieInfo(property, this.props.movieDetails[property])
-          )} </td>
-        </tr>
-      </table>
+      <div align="center" class="padding">
+      {contentHTML}
       <button onClick={() => this.goBackToSearchScreen()}> Back To Search </button>
       </div>
     )
   }
 
+  //change state to route back to search
   goBackToSearchScreen() {
     this.setState({backToSearch: true,})
   }
 
+  //return property as a key: value
   showMovieInfo(property, value) {
     // if no value return nothing
     if (value === 'N/A') {
       return
     }
     switch (property) {
+      //poster is taken care of seperately
       case 'Poster':
+      case 'Response':
         return
         break;
       case 'Ratings':
-        return <div>{property + ': ' + value.map(v => v.Source + ' ' + v.Value)} </div>
+        return <div class="padding">{property + ':' + value.map(v => ' ' + v.Source + ' ' + v.Value)} </div>
       default:
-        return <div>{property + ': ' + value} </div>
+        return <div class="padding">{property + ': ' + value} </div>
     }
   }
 }
@@ -73,4 +85,4 @@ const mapDispatchToProps = {
   showMovieDetails: showMovieDetails,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsPage)

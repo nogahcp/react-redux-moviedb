@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 
-//import { fetchMovies, getMovieDetails } from '../moviesAPI'
-import { SEARCH_MOVIES, MOVIES_FETCH_SUCCEEDED, RECEIVE_MOVIES, SHOW_MOVIE_DETAILS, DETAILS_FETCH_SUCCEEDED, GET_MORE_RESULTS, ERROR } from './actions'
+import { SEARCH_MOVIES, MOVIES_FETCH_SUCCEEDED, DETAILS_FETCH_SUCCEEDED, ERROR } from './actions'
 
 const searchReducerDefaultState = {results: [], remainingResults: 0, searchString: '', isLoading: false}
 
@@ -20,6 +19,7 @@ const searchReducer = (state = searchReducerDefaultState, action) => {
         return newState
       }
       break;
+    //on search change to loading
     case SEARCH_MOVIES:
       return { ...state, isLoading: true }
     default:
@@ -28,6 +28,7 @@ const searchReducer = (state = searchReducerDefaultState, action) => {
 }
 
 const detailsReducer = (state = {}, action) => {
+  //if fetch succeeded return detalse, else return loading
   if (action.type == DETAILS_FETCH_SUCCEEDED) {
     return { details: action.payload, isLoading: false }
   }
@@ -48,37 +49,3 @@ const reducer = combineReducers({
 })
 
 export default reducer
-
-
-
-
-// const searchReducer = (state = [], action) => {
-//   switch (action.type) {
-//     case SEARCH_MOVIES:
-//       const searchString = action.payload
-//       //fetchMovies(searchString)
-//       fetch(searchURL + searchString + '&apikey=' + apiKey)
-//         .then(res => res.json())
-//           .then(
-//             (result) => {
-//               //alert problem
-//               if (result.Response == false) {
-//                 const error = result.Error
-//                 return []
-//               }
-//               //if no problem - return new moviesResults
-//               else {
-//                 return result.Search
-//               }
-//             },
-//             // Note: it's important to handle errors here
-//             // instead of a catch() block so that we don't swallow
-//             // exceptions from actual bugs in components.
-//             (error) => {
-//               //// TODO: HANDLE ERROR
-//             }
-//           )
-//     default:
-//       return state
-//   }
-// }

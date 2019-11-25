@@ -10,31 +10,19 @@ class MovieInfo extends React.Component {
   }
 
   render() {
-    // if (this.state.showDetails === true) {
-    //   return <Redirect to= { '/movieDetails/:'+this.state.movie.imdbID }/>
-    // }
-
+    //show movie poster, title and year
     return (
-      <tr onClick={this.props.onClick}>
+      <tr onClick={this.props.onClick} class="grayHoverRow" class="grayHoverRow">
         <td>
           <img src={this.state.movie.Poster} height="200"/>
         </td>
         <td>
-          <h2> {this.state.movie.Title} </h2>
+          <div class="movieTitle"> {this.state.movie.Title} </div>
           <div> {this.state.movie.Year} </div>
         </td>
       </tr>
     )
   }
 }
-
-// const mapStateToProps = state => ({
-// })
-//
-// const mapDispatchToProps = {
-//   showMovieDetails: showMovieDetails,
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(MovieInfo)
 
 export default MovieInfo

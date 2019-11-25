@@ -6,7 +6,8 @@ import store from './redux/store'
 import logo from './logo.svg'
 import './App.css'
 import SearchScreen from './components/SearchScreen'
-import MovieDetails from './components/MovieDetails'
+import MovieDetailsPage from './components/MovieDetailsPage'
+import './css/detailsStyle.css'
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={SearchScreen} />
-          <Route exact path="/movieDetails/:movieId" component={MovieDetails} />
+          <Route exact path="/movieDetails/:movieId" component={MovieDetailsPage} />
         </Switch>
       </BrowserRouter>
     </Provider>

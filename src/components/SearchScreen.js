@@ -7,21 +7,20 @@ import {searchMovies} from '../redux/actions'
 class SearchScreen extends React.Component {
 
   render() {
-    const style = {
-      fontSize: 30
-    }
     return (
       <div align="center">
-        <input type="search" onChange={this.handleInputChange} placeholder='Search Movies' style={style} text={this.props.searchString}/>
-        <br />
+        <h2> Search For Movies </h2>
+        <input type="search" onChange={this.handleInputChange} placeholder='Search Movies' text={this.props.searchString} />
+        <br /><br/>
         <SearchResults />
       </div>
     )
   }
 
+  //call search when input is changed
   handleInputChange = (event) => {
     const searchString = event.target.value
-    //continue to search only if at least 2 letters
+    //continue to search only if at least 2 letters (search also for 0 letter to clear results)
     if (searchString.length >= 2 || searchString.length === 0) {
       this.props.searchMovies(searchString)
     }
